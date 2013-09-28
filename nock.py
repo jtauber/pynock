@@ -103,39 +103,3 @@ def tar(noun):
     else:
         ## LINE 17
         return (nock((noun[0], noun[1][0])), nock((noun[0], noun[1][1])))
-
-
-if __name__ == "__main__":
-    assert l(1) == (1, 0)
-    assert l(1, 2) == (1, 2)
-    assert l(1, 2, 3) == (1, (2, 3))
-    assert l(1, 2, 3, 4) == (1, (2, (3, 4)))
-    assert wut(1) == 1
-    assert wut((1, 2)) == 0
-    assert lus(1) == 2
-    assert lus((1, 2)) == (1, 2)
-    assert tis((1, 1)) == 0
-    assert tis((1, 2)) == 1
-    assert slot((1, 5)) == 5
-    assert slot(l(2, 5, 6)) == 5
-    assert slot(l(3, 5, 6)) == 6
-    assert slot((1, l(l(4, 5), l(6, 14, 15)))) == l((4, 5), l(6, 14, 15))
-    assert slot((2, l(l(4, 5), l(6, 14, 15)))) == (4, 5)
-    assert slot((3, l(l(4, 5), l(6, 14, 15)))) == l(6, 14, 15)
-    assert slot((7, l(l(4, 5), l(6, 14, 15)))) == (14, 15)
-    assert nock(l(l(l(4, 5), l(6, 14, 15)), 0, 7)) == (14, 15)
-    assert nock(l(42, 1, 153, 218)) == (153, 218)
-    assert nock((77, l(2, (1, 42), l(1, 1, 153, 218)))) == (153, 218)
-    assert nock((57, (0, 1))) == 57
-    assert nock(((132, 19), (0, 3))) == 19
-    assert nock((57, l(4, 0, 1))) == 58
-    assert nock(((132, 19), l(4, 0, 3))) == 20
-    assert nock((42, l(4, 0, 1))) == 43
-    assert nock((42, l(3, 0, 1))) == 1
-    assert nock((42, (l(4, 0, 1), l(3, 0, 1)))) == (43, 1)
-    assert nock(((132, 19), l(10, 37, l(4, 0, 3)))) == 20
-    assert nock((42, l(7, l(4, 0, 1), l(4, 0, 1)))) == 44
-    assert nock((42, l(8, l(4, 0, 1), (0, 1)))) == (43, 42)
-    assert nock((42, l(8, l(4, 0, 1), l(4, 0, 3)))) == 43
-    assert nock((42, l(6, (1, 0), l(4, 0, 1), (1, 233)))) == 43
-    assert nock((42, l(6, (1, 1), l(4, 0, 1), (1, 233)))) == 233
