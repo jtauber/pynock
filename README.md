@@ -8,4 +8,4 @@ Based on
 which declares "The best way to learn Nock is to read the spec and write your
 own naive interpreter." So I did :-)
 
-See `nook.py` for the first attempt.
+See `nock.py` for the first attempt.
