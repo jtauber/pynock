@@ -3,6 +3,18 @@ Nock
 
 >>> from nock import *
 
+Everything in Nock is a noun. Nouns are either atoms or cells. Atoms are
+unsigned integers. Cells are pairs of Nouns.
+
+There is an internal function wut that tells you if something is an atom
+or a cell:
+
+>>> wut(1)
+1
+>>> wut((1, 2))
+0
+
+
 >>> l(1)
 (1, 0)
 >>> l(1, 2)
@@ -11,11 +23,6 @@ Nock
 (1, (2, 3))
 >>> l(1, 2, 3, 4)
 (1, (2, (3, 4)))
-
->>> wut(1)
-1
->>> wut((1, 2))
-0
 
 >>> lus(1)
 2
