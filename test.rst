@@ -14,6 +14,16 @@ or a cell:
 >>> wut((1, 2))
 0
 
+Another internal function tis tells you if the two nouns in a cell are
+equal:
+
+>>> tis((1, 1))
+0
+>>> tis((1, 2))
+1
+
+I don't know what tis should do if you give it an atom. Nor do I know whether
+cells containing other cells should recursively pair-wise compare.
 
 >>> l(1)
 (1, 0)
@@ -28,11 +38,6 @@ or a cell:
 2
 >>> lus((1, 2))
 (1, 2)
-
->>> tis((1, 1))
-0
->>> tis((1, 2))
-1
 
 >>> slot((1, 5))
 5
