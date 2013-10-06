@@ -37,9 +37,9 @@ It is therefore just *function composition*.
 
 Here is a reduction:
 
-    *[a [7 [b c]]] =>
-    *[a [2 [b [1 c]]]] =>
-    *[*[a b] *[a [1 c]]] =>
+    *[a [7 [b c]]] ☞
+    *[a [2 [b [1 c]]]] ☞
+    *[*[a b] *[a [1 c]]] ☞
     *[*[a b] c]
 
 `[8 [b c]]` is a *formula* that, when applied to `a`, first applies `b` to `a` then applies `c` to the ordered pair of
@@ -49,9 +49,9 @@ In other words: `*[[*[a b] a] c]`
 
 To do a reduction from line 30, we're going to need to make use of line 19, though, because after the first two steps:
 
-    *[a [8 [b c]]] =>
-    *[a [7 [[[7 [[0 1] b]] [0 1]] c]]] =>
-    *[*[a [[7 [[0 1] b]] [0 1]]] c] =>
+    *[a [8 [b c]]] ☞
+    *[a [7 [[[7 [[0 1] b]] [0 1]] c]]] ☞
+    *[*[a [[7 [[0 1] b]] [0 1]]] c] ☞
 
 we end up needing to know how to apply a *formula* whose left noun is a *cell*, not just an *atom* like we've been
 dealing with up until this point.
@@ -59,15 +59,15 @@ dealing with up until this point.
 Line 19 basically says that a *formula* that doesn't start with an *atom* is treated as a list of *formulas* to apply,
 kind of like `map` would.
 
-    *[a [[b c] d]]      [*[a [b c]] *[a d]]
+    *[a [[b c] d]]  ☞  [*[a [b c]] *[a d]]
 
 Now we can continue our reduction of line 30:
 
-    *[a [8 [b c]]] =>
-    *[a [7 [[[7 [[0 1] b]] [0 1]] c]]] =>
-    *[*[a [[7 [[0 1] b]] [0 1]]] c] =>
-    *[[*[a [7 [[0 1] b ]]] *[a [0 1]]] c] = >
-    *[[*[*[a [0 1]] b] *[a [0 1]]] c] = >
+    *[a [8 [b c]]] ☞
+    *[a [7 [[[7 [[0 1] b]] [0 1]] c]]] ☞
+    *[*[a [[7 [[0 1] b]] [0 1]]] c] ☞
+    *[[*[a [7 [[0 1] b ]]] *[a [0 1]]] c] ☞
+    *[[*[*[a [0 1]] b] *[a [0 1]]] c] ☞
     *[[*[a b] a] c]
 
 You may have noticed that the *formula* `[0 1]` is the *identity* operator. That is, `*[a [0 1]]` is `a`. This is clear
