@@ -25,6 +25,13 @@ equal:
 I don't know what tis should do if you give it an atom. Nor do I know whether
 cells containing other cells should recursively pair-wise compare.
 
+The internal function ``lus`` adds one to an atom but leaves a cell untouched:
+
+>>> lus(1)
+2
+>>> lus((1, 2))
+(1, 2)
+
 >>> l(1)
 (1, 0)
 >>> l(1, 2)
@@ -33,11 +40,6 @@ cells containing other cells should recursively pair-wise compare.
 (1, (2, 3))
 >>> l(1, 2, 3, 4)
 (1, (2, (3, 4)))
-
->>> lus(1)
-2
->>> lus((1, 2))
-(1, 2)
 
 >>> slot((1, 5))
 5
