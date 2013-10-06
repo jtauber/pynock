@@ -72,3 +72,13 @@ Now we can continue our reduction of line 30:
 
 You may have noticed that the *formula* `[0 1]` is the *identity* operator. That is, `*[a [0 1]]` is `a`. This is clear
 from lines 21 and 12.
+
+`[9 [b c]]` is a *formula* that, when applied to `a`, firstly applies `c` to `a`. The *product* is taken to contain
+within it a *formula* (at address `b`, hence retrievable at `[0 b]`) that is then applied to that *product* as a whole.
+
+Here is the reduction:
+
+    *[a [9 [b c]]] ☞
+    *[*[a c] [2 [[0 1] [0 b]]]] ☞
+    *[*[*[a c] [0 1]] *[*[a c] [0 b]]] ☞
+    *[*[a c] *[*[a c] [0 b]]]
