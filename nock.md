@@ -74,7 +74,7 @@ You may have noticed that the *formula* `[0 1]` is the *identity* operator. That
 from lines 21 and 12.
 
 `[9 [b c]]` is a *formula* that, when applied to `a`, firstly applies `c` to `a`. The *product* is taken to contain
-within it a *formula* (at address `b`, hence retrievable at `[0 b]`) that is then applied to that *product* as a whole.
+within it a *formula* (at address `b`, hence retrievable by `[0 b]`) that is then applied to that *product* as a whole.
 
 Here is the reduction:
 
