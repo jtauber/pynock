@@ -1,9 +1,9 @@
 A **noun** is either an **atom** (an unsigned integer) or a *cell*. A **cell** is an ordered pair of *nouns*.
 
 Nock evaluation (`*`) crashes (hangs) if given an *atom* so it should be given a *cell*. The components of a cell
-given to `*` are the **subject** and the **formula**. 
+given to `*` are the **subject** and the **formula**, i.e. `*[subject formula]`.
 
-It's not made explicit in the spec, but a *formula* must be a *cell* otherwise `*` will crash.
+It's not made explicit in the spec, but a *formula* must also be a *cell* otherwise `*` will crash.
 
 Line 19 of the Nock spec handles the case where a *formula* doesn't start with an *atom*. Lines 21 thru 33 handle the
 case where the *formula* starts with an *atom* between `0` and `10`.
@@ -14,9 +14,9 @@ Because *nouns* are either *atoms* or *cells* and *cells* are pairs of *nouns*, 
 tree of unsigned integers.
 
 `[0 n]` is a *formula* that, when applied to one of these trees, evaluates to a particular leaf or subtree given by `n`.
-This is implemented by lines 12 thru 17 plus 21 of the spec.
+It is therefore a tree-addressing formula. This is implemented by lines 12 thru 17 plus 21 of the spec.
 
-`[1 a]` is a *formula* that, when applied to anything, evaluates to `a`.
+`[1 a]` is a *formula* that, when applied to anything, evaluates to `a`. In other words, it is a *constant function*.
 
 `[2 [b c]]` is a *formula* that, when applied to `a`, first applies `c` to `a` then applies the *product* to
 the *product* of applying `b` to `a`.
