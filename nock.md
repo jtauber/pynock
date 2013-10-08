@@ -53,7 +53,7 @@ To do a reduction from line 30, we're going to need to make use of line 19, thou
     *[a [7 [[[7 [[0 1] b]] [0 1]] c]]] ☞
     *[*[a [[7 [[0 1] b]] [0 1]]] c] ☞
 
-we end up needing to know how to apply a *formula* whose left noun is a *cell*, not just an *atom* like we've been
+we end up needing to know how to apply a *formula* whose *head* is a *cell*, not just an *atom* like we've been
 dealing with up until this point.
 
 Line 19 basically says that a *formula* that doesn't start with an *atom* is treated as a list of *formulas* to apply,
