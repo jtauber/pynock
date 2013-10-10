@@ -9,3 +9,5 @@ which declares "The best way to learn Nock is to read the spec and write your
 own naive interpreter." So I did :-)
 
 See `nock.py` for the first attempt.
+
+`nock.md` contains some hopefully helpful explanations about the details of Nock.
