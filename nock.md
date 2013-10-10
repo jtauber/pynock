@@ -75,8 +75,17 @@ Now we can continue our reduction of line 30:
 You may have noticed that the *formula* `[0 1]` is the *identity* operator. That is, `*[a [0 1]]` is `a`. This is clear
 from lines 21 and 12.
 
-`[9 [b c]]` is a *formula* that, when applied to `a`, firstly applies `c` to `a`. The *product* is taken to contain
-within it a *formula* (at address `b`, hence retrievable by `[0 b]`) that is then applied to that *product* as a whole.
+A **core** is a *cell* whose *tail* is data (possibly containing other *cores*) and whose *head* is code containing one
+or more *formulas*. The *head* of a *core* is called the **battery** and the *tail* of a *core* is called the **payload**.
+
+A *formula* in the *battery* of a *core* is called an **arm** of the *core*.
+
+An *arm* is evaluated by applying it to the *core* it's part of, sort of like a method on a Python class taking only
+`self`.
+
+`[9 [b c]]` is the *formula* for evaluating *arms*. It is a *formula* that, when applied to `a`, firstly applies `c` to
+`a`. The *product* is taken to be a *core* containing within it an *arm* (at address `b`, hence retrievable by `[0 b]`)
+that is then applied to the *core* (that *product* as a whole).
 
 Here is the reduction:
 
@@ -84,3 +93,4 @@ Here is the reduction:
     *[*[a c] [2 [[0 1] [0 b]]]] ☞
     *[*[*[a c] [0 1]] *[*[a c] [0 b]]] ☞
     *[*[a c] *[*[a c] [0 b]]]
+
