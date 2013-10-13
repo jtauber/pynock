@@ -34,6 +34,50 @@ is a *cell* with equal components and `1` if the *product* is a *cell* with non-
 
 I presume it crashes if the *product* of applying `b` to `a` is an atom.
 
+`[6 [b [c d]]]` is a *formula* that, when applied to `a`,  is equivalent to `c` if `*[a b]` is `0` and `d` if `*[a b]` is
+`1`. It is therefore a basic `if` construct.
+
+Much of the complexity is due to handling the case where `b` is neither `0` nor `1` (crashing rather than giving a bogus
+result that tries to apply a subtree of `c` or `d` to `a`).
+
+Let's try a reduction:
+
+    *[a [6 [b [c d]]]] =>
+    *[a [2 [[0 1] [2 [[1 [c d]] [[1 0] [2 [[1 [2 3]] [[1 0] [4 [4 b]]]]]]]]]]]
+    *[*[a [0 1]] *[a [2 [[1 [c d]] [[1 0] [2 [[1 [2 3]] [[1 0] [4 [4 b]]]]]]]]]]
+    *[a *[a [2 [[1 [c d]] [[1 0] [2 [[1 [2 3]] [[1 0] [4 [4 b]]]]]]]]]]
+    *[a *[*[a [1 [c d]]] *[a [[1 0] [2 [[1 [2 3]] [[1 0] [4 [4 b]]]]]]]]]
+    *[a *[[c d] *[a [[1 0] [2 [[1 [2 3]] [[1 0] [4 [4 b]]]]]]]]]
+    *[a *[[c d] [*[a [1 0]] *[a [2 [[1 [2 3]] [[1 0] [4 [4 b]]]]]]]]]
+    *[a *[[c d] [0 *[a [2 [[1 [2 3]] [[1 0] [4 [4 b]]]]]]]]]
+    *[a *[[c d] [0 *[*[a [1 [2 3]]] *[a [[1 0] [4 [4 b]]]]]]]]
+    *[a *[[c d] [0 *[[2 3] *[a [[1 0] [4 [4 b]]]]]]]]
+    *[a *[[c d] [0 *[[2 3] [*[a [1 0]] *[a [4 [4 b]]]]]]]]
+    *[a *[[c d] [0 *[[2 3] [0 *[a [4 [4 b]]]]]]]]
+    *[a *[[c d] [0 *[[2 3] [0 +*[a [4 b]]]]]]]
+    *[a *[[c d] [0 *[[2 3] [0 ++*[a b]]]]]]
+
+If `*[a b]` evaluates to `0` then `++*[a b]` will be `2`. If `*[a b]` evaluates to `1` then `++*[a b]` will be `3`.
+
+This is then used as a tree-address into `[2 3]`. Because `[0 2]` selects the left noun of a cell, `*[[2 3] [0 2]]` is
+just `2`. And because `[0 3]` selects the right noun of a cell, `*[[2 3] [0 3]]` is just `3`.
+
+This may seem like an identity operation but it insures the correct behaviour if `b` is neither `0` nor `1`. if `x` is an
+atom greater than `3` or if `x` is a cell, `*[[2 3] [0 x]]` crashes.
+
+Why does `*[[2 3] [0 x]]` crash if `x` is a cell? Well no other rule but line 17 applies.
+
+Why does `*[[2 3] [0 x]]` crash if `x` is, say `4`?
+
+    /[4 [2 3]] =>
+    /[2 /[2 [2 3]] =>
+    /[2 2]
+
+which crashes because, at that point, no other rule but line 17 applies.
+
+We can now use the sanitized tree address into `[c d]` and either get `c` or `d` as appropriate without risk that some
+subtree of `c` or `d` will be applied to `a`.
+
 `[7 [b c]]` is a *formula* that, when applied to `a`, first applies `b` to `a` then applies `c` to the *product*.
 It is therefore just *function composition*.
 
