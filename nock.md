@@ -1,6 +1,6 @@
 A **noun** is either an **atom** (an unsigned integer) or a *cell*. A **cell** is an ordered pair of *nouns*.
 The first *noun* in the cell is called the **head** and the second *noun* in the cell is called the **tail**,
-i.e. `[head tail`.
+i.e. `[head tail]`.
 
 Nock evaluation (`*`) crashes (hangs) if given an *atom* so it should be given a *cell*. The components of a cell
 given to `*` are the **subject** and the **formula**, i.e. `*[subject formula]`.
