@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 # []
 def l(*lst):
     if len(lst) == 1:
@@ -10,10 +11,12 @@ def l(*lst):
         ## LINE 2
         return (lst[0], l(*lst[1:]))
 
+
 # *
 def nock(noun):
     ## LINE 1
     return tar(noun)
+
 
 # ?
 def wut(noun):
@@ -24,6 +27,7 @@ def wut(noun):
         ## LINE 4
         return 0
 
+
 # +
 def lus(noun):
     if isinstance(noun, int):
@@ -33,6 +37,7 @@ def lus(noun):
         ## LINE 6
         return noun
 
+
 # =
 def tis(noun):
     if noun[0] == noun[1]:
@@ -41,6 +46,7 @@ def tis(noun):
     else:
         ## LINE 9
         return 1
+
 
 # this has a name in Nock so no need to call it fas
 # /
@@ -60,6 +66,7 @@ def slot(noun):
     elif noun[0] % 2 == 1:
         ## LINE 15
         return slot((3, slot(((noun[0] - 1) // 2, noun[1]))))
+
 
 def tar(noun):
     if isinstance(noun[1][0], int):
